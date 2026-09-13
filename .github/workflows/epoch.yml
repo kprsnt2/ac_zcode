@@ -22,9 +22,9 @@ jobs:
 
       - name: Random delay (0-40 min)
         run: |
-          D=$((RANDOM % 40))
+          D=$((RANDOM % 4))
           echo "Sleeping $D minutes..."
-          sleep $((D * 60))
+          sleep $((D * 10))
 
       - name: Wake the agents
         env:
