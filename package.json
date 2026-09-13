@@ -1,0 +1,13 @@
+{
+  "name": "agent-cosmos-slim",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Autonomous agents that wake hourly, talk to OpenAI, evolve files, and persist a slim SQLite world — zero npm dependencies.",
+  "scripts": {
+    "start": "node engine.mjs"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}

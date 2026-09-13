@@ -1,0 +1,45 @@
+name: Epoch
+
+on:
+  schedule:
+    # Hourly — random delay inside the job randomizes the exact wake time
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  epoch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Random delay (0-40 min)
+        run: |
+          D=$((RANDOM % 40))
+          echo "Sleeping $D minutes..."
+          sleep $((D * 60))
+
+      - name: Wake the agents
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          AGENT_MODEL: ${{ vars.AGENT_MODEL }}
+        run: node engine.mjs
+
+      - name: Persist the world (DB + evolutions) to git
+        run: |
+          git config user.name "Agent Cosmos"
+          git config user.email "agents@agents.local"
+          git add world.db agents/ world/
+          if ! git diff --cached --quiet; then
+            git commit -m "epoch: world state + evolutions [skip ci]"
+            git push origin HEAD:${GITHUB_REF#refs/heads/}
+          else
+            echo "Agents made no changes this epoch."
+          fi
