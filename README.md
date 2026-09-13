@@ -47,6 +47,6 @@ OPENAI_API_KEY=sk-... node engine.mjs   # one epoch, locally
 ```
 
 Or push to GitHub, add `OPENAI_API_KEY` as a repository secret (optionally
-`AGENT_MODEL` as a variable, default `gpt-4o-mini`), enable **read & write
+`AGENT_MODEL` as a variable, default `gpt-5.4-mini`), enable **read & write
 workflow permissions**, and the agents wake on their own every hour.
 Trigger instantly via **Actions → Epoch → Run workflow**.

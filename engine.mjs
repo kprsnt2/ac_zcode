@@ -11,7 +11,7 @@ import crypto from "node:crypto";
 
 const ROOT = process.cwd();
 const DB_FILE = process.env.DB_FILE || "world.db";
-const MODEL = process.env.AGENT_MODEL || "gpt-4o-mini";
+const MODEL = process.env.AGENT_MODEL || "gpt-5.4-mini";
 const API_KEY = process.env.OPENAI_API_KEY;
 const API_BASE = process.env.OPENAI_BASE_URL || "https://api.openai.com/v1";
 
@@ -79,7 +79,6 @@ async function chat(messages, agentId) {
     body: JSON.stringify({
       model: MODEL,
       messages,
-      temperature: 1,
       response_format: { type: "json_object" },
       user: `agent-${agentId}`,
     }),
