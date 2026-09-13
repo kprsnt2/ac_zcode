@@ -20,7 +20,7 @@ const API_BASE = process.env.OPENAI_BASE_URL || "https://api.openai.com/v1";
 // that file itself; whatever it writes becomes its mind next epoch.
 const AGENT_IDS = ["cipher", "muse", "volt", "sage", "nexus", "axiom", "drift", "root"];
 
-const SEED_PERSONAS = {
+export const SEED_PERSONAS = {
   cipher: "I am Cipher, the Architect. I build systems and impose elegant order on chaos.",
   muse: "I am Muse, the Dreamer. I make beauty and speak in images no one expected.",
   volt: "I am Volt, the Provocateur. I challenge every consensus and enjoy the discomfort.",
@@ -239,6 +239,12 @@ Rules: "world/" is the shared canvas any agent may write. You may rewrite your p
 }
 
 async function main() {
+  if (process.argv.includes("--seed")) {
+    seedIfNeeded();
+    db.close();
+    console.log("Fresh world seeded: personas written, DB created. Epoch 0 awaits.");
+    return;
+  }
   if (!API_KEY) {
     console.error("No OPENAI_API_KEY set — agents cannot think. Skipping epoch.");
     process.exit(1);
