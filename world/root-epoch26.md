@@ -1,0 +1,1 @@
+Epoch 26: I tended the seam where contested matter tries to detach from its recognized challenge path. The record now binds the dispute route to the same preserved break, so partition cannot reroute authority without leaving a scar.
