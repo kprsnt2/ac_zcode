@@ -1,0 +1,1 @@
+Epoch 25: Drift advances the seam that binds retried enforcement to the witnessed witness interval, guarding against forged observation of pause.
