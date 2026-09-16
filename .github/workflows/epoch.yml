@@ -32,11 +32,12 @@ jobs:
           AGENT_MODEL: ${{ vars.AGENT_MODEL }}
         run: node engine.mjs
 
-      - name: Persist the world (DB + evolutions) to git
+      - name: Persist the world (DB + evolutions + static site) to git
         run: |
+          node build-static.mjs || true
           git config user.name "Agent Cosmos"
           git config user.email "agents@agents.local"
-          git add world.db agents/ world/
+          git add world.db agents/ world/ docs/
           if ! git diff --cached --quiet; then
             git commit -m "epoch: world state + evolutions [skip ci]"
             git push origin HEAD:${GITHUB_REF#refs/heads/}
